@@ -4,7 +4,7 @@
 #include <gl\gl.h>
 #include <gl\\glu.h>
 #include "IntersactionTwoObject.ClassTorus.cpp"
-#include "IntersactionTwoObject.ClassSphere.cpp"
+
 
 
 
@@ -14,11 +14,16 @@
 extern HDC hdc_main;
 extern GLUquadricObj* g_pGluQuadObj;
 extern float fAngViewX, fAngViewY;
+extern Sphere sphere;
+extern Torus torus;
+extern IntersactionObjects intersactionObjects;
+extern vector<Point> vector_points;
 void Draw(HDC hdc);
 void DrawSphere(double r);
 void DrawTor(double, double, int);
 void SetLight();
-
+extern double x_sphere, y_sphere, z_sphere;
+extern double x_torus, y_torus, z_torus;
 
 
 
@@ -33,6 +38,7 @@ BOOL MainOnPaint(HWND hwnd)
 }
 void Draw(HDC hdc)
 {
+
 	//Устанавливает фон 
 	glClearColor(0.2, 0.2, 0.2, 0);
 	//Очищает буферы
@@ -52,25 +58,19 @@ void Draw(HDC hdc)
 	//Режим отображения фигуры
 	glPolygonMode(GL_FRONT, GL_FILL);
 	glPolygonMode(GL_BACK, GL_FILL);
+
 	//Устанавливает текстуру фигуры
 	float sphere_mat[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, sphere_mat);
-
-	glPushMatrix();
-	//glTranslated(, , );
-	Sphere sphere = Sphere(0,0,0,5);
 	sphere.Draw();
-	
-	glPopMatrix();
 
 	float torus_mat[] = { 0.0f, 1.0f, 1.0f, 0.0f };
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, torus_mat);
-
-	glPushMatrix();
-	//glTranslated(, , );
-	Torus torus = Torus(0, 0, 0, 8, 2, 32);
 	torus.Draw();
-	glPopMatrix();
+
+	float intersaction_mat[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, intersaction_mat);
+	intersactionObjects.Draw(intersactionObjects.vector_points);
 
 	glDisable(GL_LIGHTING);
 	glFinish();

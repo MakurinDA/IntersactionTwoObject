@@ -42,9 +42,15 @@
     <ClCompile Include="IntersactionTwoObject.ClassSphere.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="IntersactionTwoObject.ClassIntersactionObjects.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IntersactionTwoObject.Destroy.cpp">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="IntersactionTwoObject.StructPoint.cpp">
       <Filter>Исходные файлы</Filter>
     </None>
   </ItemGroup>

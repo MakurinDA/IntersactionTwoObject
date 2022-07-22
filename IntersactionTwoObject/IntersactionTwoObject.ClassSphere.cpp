@@ -3,32 +3,44 @@
 #include <vector>
 #include <gl\gl.h>
 #include <gl\\glu.h>
+#include "IntersactionTwoObject.StructPoint.cpp"
+
 using namespace std;
 
 
-struct Point
-{
-	double x;
-	double y;
-	double z;
-};
+
 extern HDC hdc_main;
 extern GLUquadricObj* g_pGluQuadObj;
 class Sphere
 {
 private:
-	double x0 = 0, y0 = 0, z0 = 0;
-	double R = 1;
+	double x0 , y0 , z0 ;
+	double R;
 
-	vector<Point> vector_points;
+
+
 #define PI    3.14159265
 public:
+	void SetX(double X)
+	{
+		x0 = X;
+	}
+	void SetY(double Y)
+	{
+		y0 = Y;
+	}
+	void SetZ(double Z)
+	{
+		z0 = Z;
+	}
+
+	vector<Point> vector_points;
 	vector<Point> Initializing()
 	{
 		int chastota = 10;
 		Point intermediate_point;
 		double x, y, z;
-		int level_of_detail = 5;
+		int level_of_detail = 4;
 		for (int i = -chastota * level_of_detail; i < chastota * level_of_detail; i++)
 		{
 			for (int j = -chastota * level_of_detail; j < chastota * level_of_detail; j++)
@@ -55,25 +67,27 @@ public:
 				vector_points.insert(vector_points.end(), intermediate_point);
 			}
 
-			return vector_points;
 		}
+			return vector_points;
 	}
 	void Draw()
 	{
+		glPushMatrix();
+		glTranslated(x0,y0,z0);
 		gluSphere(g_pGluQuadObj, R, 32, 32);
+		glPopMatrix();
 	}
+
 	//void SetX(double x00)
 	//{
 	//}
 
-	Sphere(double x0, double y0, double z0, double R)
+	Sphere(double x00, double y00, double z00, double R0)
 	{
-		x0 = x0;
-		y0 = y0;
-		z0 = z0;
-		R = R;
-
-
+		x0 = x00;
+		y0 = y00;
+		z0 = z00;
+		R = R0;
 
 	}
 };

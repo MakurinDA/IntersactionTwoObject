@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="IntersactionTwoObject.ClassSphere.cpp" />
     <ClCompile Include="IntersactionTwoObject.Create.cpp" />
+    <ClCompile Include="IntersactionTwoObject.ClassIntersactionObjects.cpp" />
     <ClCompile Include="IntersactionTwoObject.LButtonDown.cpp" />
     <ClCompile Include="IntersactionTwoObject.MouseMove.cpp" />
     <ClCompile Include="IntersactionTwoObject.ClassTorus.cpp" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="IntersactionTwoObject.Destroy.cpp" />
+    <None Include="IntersactionTwoObject.StructPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

@@ -171,6 +171,7 @@ BOOL RegisterClassaOkna(void)
 }
 LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+
 	switch (msg)
 	{
 	case WM_CREATE:

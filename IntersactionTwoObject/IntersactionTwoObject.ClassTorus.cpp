@@ -1,20 +1,71 @@
 #include <windows.h>
 #include <math.h>
+#include <vector>
 
 #include <gl\gl.h>
 #include <gl\\glu.h>
 
-struct C3dVector
-{
-	double x, y, z;
-};
+#include "IntersactionTwoObject.ClassIntersactionObjects.cpp"
+
+using namespace std;
 
 class Torus
 {
 private:
 	double x0, y0, z0, r_max, r_min, n;
 #define PI    3.14159265
+struct C3dVector
+{
+	double x, y, z;
+};
+
+
 public:
+	void SetX(double X)
+	{
+		x0 = X;
+	}
+	void SetY(double Y)
+	{
+		y0 = Y;
+	}
+	void SetZ(double Z)
+	{
+		z0 = Z;
+	}
+	vector<Point> vector_points;
+	vector<Point> Initializing()
+	{
+		int chastota = 10;
+		Point intermediate_point;
+		double x, y, z;
+		int level_of_detail = 4;
+		for (int i = -chastota * level_of_detail; i < chastota * level_of_detail; i++)
+		{
+			for (int j = -chastota * level_of_detail; j < chastota * level_of_detail; j++)
+			{
+				x = i;
+				y = j;
+				x /= (level_of_detail * 2);
+				y /= (level_of_detail * 2);
+				z = sqrt(sqrt(4 * pow(r_max, 2) * ((pow(x, 2)) + (pow(y, 2)))) - pow(x, 2) - pow(y, 2) - pow(r_max, 2) + pow(r_min, 2));
+
+				intermediate_point.x = x+x0;
+				intermediate_point.y =y+y0;
+				intermediate_point.z =z+z0;
+
+
+				//if (z !=0)
+				vector_points.insert(vector_points.end(), intermediate_point);
+				intermediate_point.z = -z+z0;
+				//	if (z != 0)
+				vector_points.insert(vector_points.end(), intermediate_point);
+
+			}
+
+		}
+		return vector_points;
+	}
 	void Draw()
 	{
 		/*----------------------*/
@@ -29,6 +80,8 @@ public:
 
 		int  i;
 
+		glPushMatrix();
+		glTranslated(x0, y0, z0);
 		glFrontFace(GL_CCW);
 
 		DFI = 2 * PI / n;
@@ -95,7 +148,7 @@ public:
 
 
 		glFrontFace(GL_CW);
-
+		glPopMatrix();
 	}
 	Torus(double x00, double y00, double z00, double Rmax, double Rmin, int n0)
 	{
